@@ -27,29 +27,44 @@ const TodoBody = ({todos, setTodos}) => {
     //the dependency array is used to determine how the browser will rerender information
 
       useEffect(() => {
+        //callback function
            fetch('https://playground.4geeks.com/todo/users/Javi')
            .then(response => response.json())
            .then(data => {
               setTodos(data.todos)
            })
            .catch(error => console.log('Error: ', error))
-
-         
-      }, [])
-
-    // create a useEffect to Delete a task
+      },
+      // dependency array
+      [])
     
-
-
-    const deleteTask = (selectedTodoId) => {
-
+      const deleteTask = (selectedTodoId) => {
+        fetch('https://playground.4geeks.com/todo/todos/' + selectedTodoId, {
+            method: 'DELETE',
+            
+        })
+            .then(resp => {
+                if (resp.ok) {
+                    console.log("Successfully deleted Todo!");
+                    
+                    setTodos(todos.filter(todo => todo.id !== selectedTodoId));
+                } else {
+                    console.log("Failed to delete Todo:", resp.status);
+                   
+                }
+            })
+            .catch(error => {
+                console.log("There was an error deleting the Todo", error)
+            })
+    }
+         
         // filter the todos and keep any todo that does not match the id
         // assign it to a new array variable
         // then we call setTodos to set the filtered array
 
-        let updatedTodos = todos.filter(todo => todo.id !== selectedTodoId);
-        setTodos(updatedTodos);
-    }
+                  // let updatedTodos = todos.filter(todo => todo.id !== selectedTodoId);
+                  // setTodos(updatedTodos);
+    
 
     let renderTasks = todos.map( todo => {
         return (
@@ -63,8 +78,6 @@ const TodoBody = ({todos, setTodos}) => {
                  className="bi bi-trash-fill" 
                  viewBox="0 0 16 16"
                  onClick={() => deleteTask(todo.id)}> 
-                
-               
                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
             </svg>
         </span>

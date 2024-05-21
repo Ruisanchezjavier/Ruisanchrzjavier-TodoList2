@@ -10,24 +10,33 @@ const TodoHeader = ({todos, setTodos}) => {
     const [idCounter, setIdCounter] = useState(0);
 
     const addTask = () => {
-      console.log("creating new task: ", newTask);
-
 
       let newTodoObject = {
           id: idCounter,
           label: newTask, 
       };
-      console.log("new object:", newTodoObject)
-
-       setTodos([...todos, newTodoObject]);
-        setIdCounter([idCounter + 1]);
-        }
     
 
-    const checkTextBox = () => {
-        let textBox = document.querySelector(".task-input")
-        if (textBox.value === "") {
-        alert("Please add task.") 
+      fetch('https://playground.4geeks.com/todo/todos/Javi', {
+        method: 'POST',
+        body: JSON.stringify(newTodoObject),
+        headers: {"Content-Type": 'application/json'}
+      })
+      .then(response => {
+        if (!response.ok) throw Error(response.statusText)
+            return(response.json())
+      }) 
+      .then(data => {
+        setTodos([...todos, data]);
+        setIdCounter(idCounter + 1);
+      })
+      .catch(error => console.log(error))         
+    }
+    //text validation
+    const checkTextBox = () => {  
+        let textbox = document.querySelector(".task-input");
+        if (textbox.value === "") {
+            alert("Please add a task.")
         } else {
             addTask();
             setNewTask("");

@@ -29,7 +29,7 @@ const TodoApp = () => {
             <div>
                 <TodoFooter 
                 todos={todos}
-                setTodos={setTodos}/>
+                />
             </div>  
         </div>
 		</>
