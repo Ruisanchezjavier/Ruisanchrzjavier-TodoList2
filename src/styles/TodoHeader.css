@@ -1,3 +1,32 @@
 .task-input {
     margin-right: 20px;
+    width: 300px;
+}
+
+.container-fluid{
+    margin-top: 50px;
+    text-align: center;
+    width: 100%;
+    color: #e3929249;
+    
+}
+
+h1{
+    font-size: 100px;
+    font-family:serif;
+}
+
+.task-input{
+    border: none;
+}
+
+button{
+   width: 20%;  
+   height: 20%;
+   background-color:rgb(235, 224, 237);
+   
+}
+
+.hide-button{
+    visibility: hidden;
 }

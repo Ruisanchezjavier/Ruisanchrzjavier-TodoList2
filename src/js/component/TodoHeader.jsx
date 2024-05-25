@@ -43,19 +43,28 @@ const TodoHeader = ({todos, setTodos}) => {
         }
     }
 
+    const handleKeyPress = (event) => {
+      if (event.key == 'Enter') {
+        checkTextBox();
+      }
+    }
+
+
+
 
 	return (
 		<>
 		<header className="header">
-            <h1>todos</h1>
             <input
             className="task-input"
             type="text"
             placeholder="What needs to be done?"
              value={newTask}
              onChange={event => setNewTask(event.target.value)}
+             onKeyDown={handleKeyPress}
             />
             <button
+             className="hide-button"
              onClick={checkTextBox}
             >Add Task</button>
         </header>

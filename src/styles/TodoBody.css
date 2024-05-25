@@ -5,9 +5,31 @@
 ul {
     list-style-type: none;
     margin-left: -20px;
+    border-top: grey;
 }
 
 .task{
     display: inline-block;
     width:80%;
 }
+
+.basura {
+    width: 100px;
+    margin-left: -100px;
+}
+
+.basura {
+    visibility: hidden;
+    cursor: pointer;
+}
+.task:hover + .basura{
+    cursor: pointer;
+    visibility: visible;
+    flex-wrap: nowrap;
+}
+.basura:hover {
+    cursor: pointer;
+    visibility: visible;
+    flex-wrap: nowrap;
+}
+
